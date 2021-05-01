@@ -7,22 +7,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import com.example.recruitai.Model.Job;
+import com.example.recruitai.Model.UserClass;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Company extends AppCompatActivity {
-    Button post;
+public class JobDetailsCompany extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference dat;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    FirebaseRecyclerAdapter<Job,JobCompanyViewHolder> jobAdapter;
+    FirebaseRecyclerAdapter<UserClass,CompanyUserViewHolder> userAdapter;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
     String uid;
@@ -30,7 +29,7 @@ public class Company extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_company);
+        setContentView(R.layout.activity_job_details_company);
 
         database=FirebaseDatabase.getInstance();
         dat=database.getReference("Jobs");
@@ -38,45 +37,37 @@ public class Company extends AppCompatActivity {
         user=firebaseAuth.getCurrentUser();
         uid=user.getUid();
 
-        recyclerView=(RecyclerView)findViewById(R.id.rv2);
+        recyclerView=(RecyclerView)findViewById(R.id.rv3);
         recyclerView.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        loadCJobs();
-
-        post=findViewById(R.id.post);
-        post.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Company.this,PostJob.class));
-            }
-        });
+        loadUsers();
     }
 
-    private void loadCJobs() {
-        jobAdapter=new FirebaseRecyclerAdapter<Job, JobCompanyViewHolder>(Job.class,
-                R.layout.companyjobcard,
-                JobCompanyViewHolder.class,
-                dat.orderByKey().equalTo(uid)
+    private void loadUsers() {
+        userAdapter=new FirebaseRecyclerAdapter<UserClass, CompanyUserViewHolder>(UserClass.class,
+                R.layout.applicantcard,
+                CompanyUserViewHolder.class,
+                dat.child(uid).child("Juser").orderByKey().equalTo("0")
+                //dat.orderByKey().equalTo(uid).orderByChild("Juser").orderByKey().equalTo("0")
         ) {
             @Override
-            protected void populateViewHolder(JobCompanyViewHolder viewholder, Job job, int i) {
-                viewholder.jname.setText(job.getJname());
-                viewholder.status.setText(job.getJphase());
+            protected void populateViewHolder(CompanyUserViewHolder viewholder, UserClass user, int i) {
+                viewholder.uname.setText(user.getName());
+                viewholder.status.setText(user.getStatus());
 
-                final Job local=job;
+                final UserClass local=user;
                 viewholder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Intent jobdet=new Intent(Company.this,JobDetailsCompany.class);
-                        jobdet.putExtra("JobID",jobAdapter.getRef(position).getKey());
+                        Intent jobdet = new Intent(JobDetailsCompany.this, UserAnalysis.class);
+                        jobdet.putExtra("UserID", userAdapter.getRef(position).getKey());
                         startActivity(jobdet);
-
                     }
                 });
             }
         };
-        recyclerView.setAdapter(jobAdapter);
+        recyclerView.setAdapter(userAdapter);
 
     }
 }
