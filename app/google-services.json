@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1012646425167",
+    "firebase_url": "https://recruit-ai-cb3c1-default-rtdb.firebaseio.com",
+    "project_id": "recruit-ai-cb3c1",
+    "storage_bucket": "recruit-ai-cb3c1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012646425167:android:f7b1558c2c37a6a178303a",
+        "android_client_info": {
+          "package_name": "com.example.recruitai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1012646425167-sruqo58iaieicr0eji5qm6kfat532m6s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.recruitai",
+            "certificate_hash": "53dac16342c9e54e5e7fd1dc5e56a386797dfc8b"
+          }
+        },
+        {
+          "client_id": "1012646425167-gbdn5kpgbm1bfpl535ggi0f2pr7gr0e2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAKl3izxhPxjyok8ks2q4CwVmC_2_uPeI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1012646425167-gbdn5kpgbm1bfpl535ggi0f2pr7gr0e2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
