@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/jobusercard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtposition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_bold"
+            android:textColor="@color/purple_500"
+            android:textSize="36sp" />
+
+        <TextView
+            android:id="@+id/txtcname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_semibold"
+            android:textColor="#B10505"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/txtloc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_thin"
+            android:textColor="#050505"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
