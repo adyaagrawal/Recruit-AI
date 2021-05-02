@@ -1,11 +1,13 @@
 package com.example.recruitai.Model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class UserClass {
     String Name;
     String Phone;
     String Current;
     String Status;
-    Float Resume;
+    Double resume_score;
     String Resumepdf;
     String Interviewmp4;
     String Audiotext;
@@ -54,12 +56,12 @@ public class UserClass {
         Status = status;
     }
 
-    public Float getResume() {
-        return Resume;
+    public Double getResume_score() {
+        return resume_score;
     }
 
-    public void setResume(Float resume) {
-        Resume = resume;
+    public void setResume_score(Double resume_score) {
+        this.resume_score = resume_score;
     }
 
     public String getResumepdf() {

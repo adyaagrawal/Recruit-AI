@@ -8,19 +8,25 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.recruitai.Model.ResumeResponse;
 import com.example.recruitai.Model.UserClass;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -29,6 +35,12 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserApply extends AppCompatActivity {
     EditText uname,uphone,ucurrent;
@@ -43,6 +55,7 @@ public class UserApply extends AppCompatActivity {
     String url;
     String JobID;
     FirebaseDatabase mdatabase;
+    DatabaseReference det;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +66,7 @@ public class UserApply extends AppCompatActivity {
         uid=user.getUid();
 
         mdatabase=FirebaseDatabase.getInstance();
+        det=mdatabase.getReference();
 
         uname=findViewById(R.id.userName);
         uphone=findViewById(R.id.phone);
@@ -81,8 +95,9 @@ public class UserApply extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(UserApply.this,"Job Applied",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(UserApply.this,User.class));
+                        apicall();
                     }
+
                 });
 
             }
@@ -119,6 +134,29 @@ public class UserApply extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void apicall() {
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl("https://recruitai.herokuapp.com/resumeanalysis/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        API api=retrofit.create(API.class);
+        Call<List<ResumeResponse>> call=api.resume(uid,JobID);
+        call.enqueue(new Callback<List<ResumeResponse>>() {
+            @Override
+            public void onResponse(Call<List<ResumeResponse>> call, Response<List<ResumeResponse>> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(UserApply.this,"Code: "+response.code(),Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Toast.makeText(UserApply.this,"Resume Processed",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(UserApply.this,User.class));
+            }
+            @Override
+            public void onFailure(Call<List<ResumeResponse>> call, Throwable t) {
+            }
+        });
     }
 
     ProgressDialog dialog;

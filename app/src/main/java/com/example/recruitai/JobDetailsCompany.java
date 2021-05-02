@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.recruitai.Model.Job;
 import com.example.recruitai.Model.UserClass;
@@ -49,20 +50,35 @@ public class JobDetailsCompany extends AppCompatActivity {
                 R.layout.applicantcard,
                 CompanyUserViewHolder.class,
                 dat.child(uid).child("Juser").orderByKey().equalTo("0")
-                //dat.orderByKey().equalTo(uid).orderByChild("Juser").orderByKey().equalTo("0")
         ) {
             @Override
             protected void populateViewHolder(CompanyUserViewHolder viewholder, UserClass user, int i) {
                 viewholder.uname.setText(user.getName());
                 viewholder.status.setText(user.getStatus());
 
-                final UserClass local=user;
                 viewholder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Intent jobdet = new Intent(JobDetailsCompany.this, UserAnalysis.class);
-                        jobdet.putExtra("UserID", userAdapter.getRef(position).getKey());
-                        startActivity(jobdet);
+                        Toast.makeText(JobDetailsCompany.this,user.getStatus(),Toast.LENGTH_SHORT).show();
+                        if(user.getStatus().equals("Resume Processed")){
+                            Intent jobdet = new Intent(JobDetailsCompany.this, UserAnalysis.class);
+                            jobdet.putExtra("UserID", userAdapter.getRef(position).getKey());
+                            startActivity(jobdet);
+                        }
+                        else if(user.getStatus()=="Interview phase"){
+                            Toast.makeText(JobDetailsCompany.this,"User is yet to give interview",Toast.LENGTH_SHORT).show();
+                        }
+
+                        else if(user.getStatus()=="Interview Submitted"){
+                            Toast.makeText(JobDetailsCompany.this,"Interview is being processed",Toast.LENGTH_SHORT).show();
+                        }
+
+                        else if(user.getStatus()=="Interview Processed"){
+                            Intent jobdet = new Intent(JobDetailsCompany.this, FinalAnalysis.class);
+                            jobdet.putExtra("UserID", userAdapter.getRef(position).getKey());
+                            startActivity(jobdet);
+                        }
+
                     }
                 });
             }
