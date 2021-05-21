@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Environment
 import android.util.Log
 import android.widget.Button
@@ -19,16 +20,13 @@ import java.io.File
 class MainActivity2 : AppCompatActivity() {
     val TAG = "MainActivity2"
     var isRecording = false
-
     var CAMERA_PERMISSION = Manifest.permission.CAMERA
     var RECORD_AUDIO_PERMISSION = Manifest.permission.RECORD_AUDIO
-
     var RC_PERMISSION = 101
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
-
         val recordFiles = ContextCompat.getExternalFilesDirs(this, Environment.DIRECTORY_MOVIES)
         val storageDirectory = recordFiles[0]
         val videoRecordingFilePath = "${storageDirectory.absoluteFile}/${System.currentTimeMillis()}_video.mp4"
@@ -36,6 +34,17 @@ class MainActivity2 : AppCompatActivity() {
         if (checkPermissions()) startCameraSession() else requestPermissions()
         var video_record : Button = findViewById(R.id.video_record)
         video_record.setOnClickListener {
+            val timer = object: CountDownTimer(60000, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    textView15.setText((millisUntilFinished/1000).toString());
+                }
+
+                override fun onFinish() {
+                    Toast.makeText(this@MainActivity2, "Time is up. Recording Stopped", Toast.LENGTH_SHORT).show()
+                    camera_view.stopRecording()
+                }
+            }
+            timer.start()
             if (isRecording) {
                 isRecording = false
                 video_record.text = "Record Video"
@@ -48,7 +57,6 @@ class MainActivity2 : AppCompatActivity() {
                 recordVideo(videoRecordingFilePath)
             }
         }
-
         button.setOnClickListener{
             startActivity(Intent(this@MainActivity2, FinalAnalysis::class.java))
         }
@@ -106,6 +114,4 @@ class MainActivity2 : AppCompatActivity() {
             }
         })
     }
-
-
 }

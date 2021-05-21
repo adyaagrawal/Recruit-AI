@@ -138,7 +138,7 @@ public class UserApply extends AppCompatActivity {
 
     private void apicall() {
         Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl("https://recruitai.herokuapp.com/resumeanalysis/")
+                .baseUrl("https://recruitai-resume.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         API api=retrofit.create(API.class);
@@ -150,8 +150,12 @@ public class UserApply extends AppCompatActivity {
                     Toast.makeText(UserApply.this,"Code: "+response.code(),Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Toast.makeText(UserApply.this,"Resume Processed",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(UserApply.this,User.class));
+                List<ResumeResponse> list=response.body();
+                Log.d("ai",response.body().toString());
+                if(list.get(0).getId().equals(uid)){
+                    Toast.makeText(UserApply.this,"Resume is being analysed",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(UserApply.this,User.class));
+                }
             }
             @Override
             public void onFailure(Call<List<ResumeResponse>> call, Throwable t) {
