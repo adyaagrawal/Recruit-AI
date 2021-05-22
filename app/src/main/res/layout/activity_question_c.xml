@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QuestionC">
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="311dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="73dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="560dp"
+        android:fontFamily="@font/raleway_bold"
+        android:text="Enter question for interview"
+        android:textColor="@color/purple_500"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/question"
+        android:layout_width="305dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="442dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <Button
+        android:id="@+id/questionsubmit"
+        android:layout_width="178dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="117dp"
+        android:layout_marginTop="221dp"
+        android:layout_marginEnd="117dp"
+        android:layout_marginBottom="167dp"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question" />
+</androidx.constraintlayout.widget.ConstraintLayout>
