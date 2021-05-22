@@ -1,9 +1,5 @@
 package com.example.recruitai;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,6 +11,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.recruitai.Model.ResumeResponse;
 import com.example.recruitai.Model.UserClass;
 import com.google.android.gms.tasks.Continuation;
@@ -22,19 +22,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,10 +40,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserApply extends AppCompatActivity {
-    EditText uname,uphone,ucurrent;
+    private static final String TAG = "UserApply";
+    EditText uname, uphone, ucurrent;
     ImageView download;
     ImageView upload;
-    String unames,uphones,ucurrents;
+    String unames, uphones, ucurrents;
     Button apply;
     Uri imageuri = null;
     FirebaseAuth firebaseAuth;
@@ -56,46 +54,48 @@ public class UserApply extends AppCompatActivity {
     String JobID;
     FirebaseDatabase mdatabase;
     DatabaseReference det;
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_apply);
-        firebaseAuth=FirebaseAuth.getInstance();
-        user=firebaseAuth.getCurrentUser();
-        uid=user.getUid();
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
+        assert user != null;
+        uid = user.getUid();
 
-        mdatabase=FirebaseDatabase.getInstance();
-        det=mdatabase.getReference();
+        mdatabase = FirebaseDatabase.getInstance();
+        det = mdatabase.getReference();
 
-        uname=findViewById(R.id.userName);
-        uphone=findViewById(R.id.phone);
-        ucurrent=findViewById(R.id.currentemployment);
+        uname = findViewById(R.id.userName);
+        uphone = findViewById(R.id.phone);
+        ucurrent = findViewById(R.id.currentemployment);
 
         if (getIntent() != null) {
             JobID = getIntent().getStringExtra("JobID");
         }
 
-        download=findViewById(R.id.imageView4);
+        download = findViewById(R.id.imageView4);
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
             }
         });
-        apply=findViewById(R.id.applyjob);
+        apply = findViewById(R.id.applyjob);
 
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserClass user=new UserClass(unames,uphones,ucurrents,"Resume Submitted",url);
-                List<UserClass> list= new ArrayList<UserClass>();
+                UserClass user = new UserClass(unames, uphones, ucurrents, "Resume Submitted", url);
+                List<UserClass> list = new ArrayList<UserClass>();
                 list.add(user);
                 mdatabase.getReference().child("Jobs").child(JobID).child("Juser").setValue(list).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(UserApply.this,"Job Applied",Toast.LENGTH_SHORT).show();
                         apicall();
+                        Toast.makeText(UserApply.this, "Job Applied", Toast.LENGTH_SHORT).show();
                     }
 
                 });
@@ -103,24 +103,24 @@ public class UserApply extends AppCompatActivity {
             }
         });
 
-        upload=findViewById(R.id.imageView30);
+        upload = findViewById(R.id.imageView30);
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                unames=uname.getText().toString().trim();
-                ucurrents=ucurrent.getText().toString().trim();
-                uphones=uphone.getText().toString().trim();
-                if(unames.isEmpty()){
+                unames = uname.getText().toString().trim();
+                ucurrents = ucurrent.getText().toString().trim();
+                uphones = uphone.getText().toString().trim();
+                if (unames.isEmpty()) {
                     uname.setError("Name is required");
                     uname.requestFocus();
                     return;
                 }
-                if(ucurrents.isEmpty()){
+                if (ucurrents.isEmpty()) {
                     ucurrent.setError("Current Employment is required");
                     ucurrent.requestFocus();
                     return;
                 }
-                if(uphones.isEmpty()){
+                if (uphones.isEmpty()) {
                     uphone.setError("Phone is required");
                     uphone.requestFocus();
                     return;
@@ -137,33 +137,33 @@ public class UserApply extends AppCompatActivity {
     }
 
     private void apicall() {
-        Retrofit retrofit=new Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://recruitai-resume.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        API api=retrofit.create(API.class);
-        Call<List<ResumeResponse>> call=api.resume(uid,JobID);
-        call.enqueue(new Callback<List<ResumeResponse>>() {
+        API api = retrofit.create(API.class);
+        Call<ResumeResponse> call = api.resume(uid, JobID);
+
+        call.enqueue(new Callback<ResumeResponse>() {
             @Override
-            public void onResponse(Call<List<ResumeResponse>> call, Response<List<ResumeResponse>> response) {
-                if(!response.isSuccessful()){
-                    Toast.makeText(UserApply.this,"Code: "+response.code(),Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                List<ResumeResponse> list=response.body();
-                Log.d("ai",response.body().toString());
-                if(list.get(0).getId().equals(uid)){
-                    Toast.makeText(UserApply.this,"Resume is being analysed",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(UserApply.this,User.class));
+            public void onResponse(@NotNull Call<ResumeResponse> call, @NotNull Response<ResumeResponse> response) {
+                Log.d(TAG, "onResponse Called");
+                Log.d(TAG, "Code: " + response.code());
+                ResumeResponse object = response.body();
+                if (Objects.requireNonNull(object).getId().equals(uid)) {
+                    Toast.makeText(UserApply.this, "Resume is being analysed", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(UserApply.this, User.class));
                 }
             }
+
             @Override
-            public void onFailure(Call<List<ResumeResponse>> call, Throwable t) {
+            public void onFailure(@NotNull Call<ResumeResponse> call, @NotNull Throwable t) {
+                Log.d(TAG, "onFailure Called");
+                Log.d(TAG, t.getMessage());
             }
         });
     }
 
-    ProgressDialog dialog;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -203,7 +203,7 @@ public class UserApply extends AppCompatActivity {
                         Uri uri = task.getResult();
                         String myurl;
                         myurl = uri.toString();
-                        url=myurl;
+                        url = myurl;
                         Toast.makeText(UserApply.this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
 
                         Toast.makeText(UserApply.this, myurl, Toast.LENGTH_SHORT).show();
@@ -216,4 +216,4 @@ public class UserApply extends AppCompatActivity {
             });
         }
     }
-    }
+}
