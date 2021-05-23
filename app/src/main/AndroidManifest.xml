@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RecruitAI">
-        <activity android:name=".Interview"></activity>
+        <activity android:name=".Interview" />
         <activity android:name=".QuestionC" />
         <activity android:name=".FinalAnalysis" />
         <activity android:name=".UserAnalysis" />

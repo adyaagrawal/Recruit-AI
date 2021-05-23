@@ -3,8 +3,6 @@ package com.example.recruitai;
 import com.example.recruitai.Model.InterviewResponse;
 import com.example.recruitai.Model.ResumeResponse;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
