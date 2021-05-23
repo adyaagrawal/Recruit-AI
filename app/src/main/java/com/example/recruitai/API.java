@@ -13,9 +13,9 @@ public interface API {
 
     //https://recruitai-resume.herokuapp.com/analyseresume/?userid=IlGqWBBHVoQ45S04v0H3jF4h9AC2&companyid=vrxXYhd0SqWt96PaE1UpIulmazV2
     @GET("analyseresume")
-    Call<List<ResumeResponse>> resume(@Query("userid") String uid, @Query("companyid") String cid);
+    Call<ResumeResponse> resume(@Query("userid") String uid, @Query("companyid") String cid);
 
     @GET("processVideo")
-    Call<List<InterviewResponse>> interview(@Query("userid") String uid);
+    Call<InterviewResponse> interview(@Query("userid") String uid);
 
 }

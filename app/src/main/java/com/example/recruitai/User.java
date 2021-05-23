@@ -80,7 +80,6 @@ public class User extends AppCompatActivity {
                                     jobdet.putExtra("JobID",jobAdapter.getRef(position).getKey());
                                     startActivity(jobdet);
                                 }
-
                             }
 
                             @Override

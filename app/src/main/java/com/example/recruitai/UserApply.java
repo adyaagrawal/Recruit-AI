@@ -30,11 +30,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,6 +46,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserApply extends AppCompatActivity {
+    private static final String TAG = "UserApply";
     EditText uname,uphone,ucurrent;
     ImageView download;
     ImageView upload;
@@ -97,9 +101,7 @@ public class UserApply extends AppCompatActivity {
                         Toast.makeText(UserApply.this,"Job Applied",Toast.LENGTH_SHORT).show();
                         apicall();
                     }
-
                 });
-
             }
         });
 
@@ -137,28 +139,29 @@ public class UserApply extends AppCompatActivity {
     }
 
     private void apicall() {
-        Retrofit retrofit=new Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://recruitai-resume.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        API api=retrofit.create(API.class);
-        Call<List<ResumeResponse>> call=api.resume(uid,JobID);
-        call.enqueue(new Callback<List<ResumeResponse>>() {
+        API api = retrofit.create(API.class);
+        Call<ResumeResponse> call = api.resume(uid, JobID);
+
+        call.enqueue(new Callback<ResumeResponse>() {
             @Override
-            public void onResponse(Call<List<ResumeResponse>> call, Response<List<ResumeResponse>> response) {
-                if(!response.isSuccessful()){
-                    Toast.makeText(UserApply.this,"Code: "+response.code(),Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                List<ResumeResponse> list=response.body();
-                Log.d("ai",response.body().toString());
-                if(list.get(0).getId().equals(uid)){
-                    Toast.makeText(UserApply.this,"Resume is being analysed",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(UserApply.this,User.class));
+            public void onResponse(@NotNull Call<ResumeResponse> call, @NotNull Response<ResumeResponse> response) {
+                Log.d(TAG, "onResponse Called");
+                Log.d(TAG, "Code: " + response.code());
+                ResumeResponse object = response.body();
+                if (Objects.requireNonNull(object).getId().equals(uid)) {
+                    Toast.makeText(UserApply.this, "Resume is being analysed", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(UserApply.this, User.class));
                 }
             }
+
             @Override
-            public void onFailure(Call<List<ResumeResponse>> call, Throwable t) {
+            public void onFailure(@NotNull Call<ResumeResponse> call, @NotNull Throwable t) {
+                Log.d(TAG, "onFailure Called");
+                Log.d(TAG, t.getMessage());
             }
         });
     }
