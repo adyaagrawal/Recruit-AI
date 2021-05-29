@@ -28,15 +28,49 @@
         android:layout_width="305dp"
         android:layout_height="52dp"
         android:layout_marginStart="51dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="123dp"
         android:layout_marginEnd="55dp"
-        android:layout_marginBottom="442dp"
+        android:layout_marginBottom="385dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="227dp"
+        android:layout_marginBottom="22dp"
+        android:fontFamily="@font/raleway_bold"
+        android:text="Question"
+        android:textColor="#C10E0E"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginEnd="211dp"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/raleway_bold"
+        android:text="Language"
+        android:textColor="#C10E0E"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <Button
         android:id="@+id/questionsubmit"

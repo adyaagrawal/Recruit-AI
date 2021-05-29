@@ -49,7 +49,7 @@ public class JobDetailsCompany extends AppCompatActivity {
         userAdapter=new FirebaseRecyclerAdapter<UserClass, CompanyUserViewHolder>(UserClass.class,
                 R.layout.applicantcard,
                 CompanyUserViewHolder.class,
-                dat.child(uid).child("Juser").orderByKey().equalTo("0")
+                dat.child(uid).child("Juser").orderByKey()
         ) {
             @Override
             protected void populateViewHolder(CompanyUserViewHolder viewholder, UserClass user, int i) {
@@ -65,15 +65,15 @@ public class JobDetailsCompany extends AppCompatActivity {
                             jobdet.putExtra("UserID", userAdapter.getRef(position).getKey());
                             startActivity(jobdet);
                         }
-                        else if(user.getStatus()=="Interview phase"){
+                        else if(user.getStatus().equals("Interview phase")){
                             Toast.makeText(JobDetailsCompany.this,"User is yet to give interview",Toast.LENGTH_SHORT).show();
                         }
 
-                        else if(user.getStatus()=="Interview Submitted"){
+                        else if(user.getStatus().equals("Interview Submitted")){
                             Toast.makeText(JobDetailsCompany.this,"Interview is being processed",Toast.LENGTH_SHORT).show();
                         }
 
-                        else if(user.getStatus()=="Interview Processed"){
+                        else if(user.getStatus().equals("Interview Processed")){
                             Intent jobdet = new Intent(JobDetailsCompany.this, FinalAnalysis.class);
                             jobdet.putExtra("UserID", userAdapter.getRef(position).getKey());
                             startActivity(jobdet);

@@ -3,57 +3,58 @@ package com.example.recruitai.Model;
 import com.google.gson.annotations.SerializedName;
 
 public class UserClass {
-    String Name;
-    String Phone;
-    String Current;
-    String Status;
+    String name;
+    String phone;
+    String current;
+    String status;
     Double resume_score;
-    String Resumepdf;
-    String Interviewmp4;
-    String Audiotext;
-    Float Interviewscore;
+    String resumepdf;
+    String interviewmp4;
+    String audio_text;
+    String confidence_score;
+    Emotions emotions;
 
     public UserClass() {
     }
 
     public UserClass(String name, String phone, String current, String status, String resumepdf) {
-        Name = name;
-        Phone = phone;
-        Current = current;
-        Status = status;
-        Resumepdf = resumepdf;
-    }
-
-    public String getPhone() {
-        return Phone;
-    }
-
-    public void setPhone(String phone) {
-        Phone = phone;
-    }
-
-    public String getCurrent() {
-        return Current;
-    }
-
-    public void setCurrent(String current) {
-        Current = current;
+        this.name = name;
+        this.phone = phone;
+        this.current = current;
+        this.status = status;
+        this.resumepdf = resumepdf;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(String current) {
+        this.current = current;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 
     public Double getResume_score() {
@@ -65,34 +66,42 @@ public class UserClass {
     }
 
     public String getResumepdf() {
-        return Resumepdf;
+        return resumepdf;
     }
 
     public void setResumepdf(String resumepdf) {
-        Resumepdf = resumepdf;
+        this.resumepdf = resumepdf;
     }
 
     public String getInterviewmp4() {
-        return Interviewmp4;
+        return interviewmp4;
     }
 
     public void setInterviewmp4(String interviewmp4) {
-        Interviewmp4 = interviewmp4;
+        this.interviewmp4 = interviewmp4;
     }
 
-    public String getAudiotext() {
-        return Audiotext;
+    public String getAudio_text() {
+        return audio_text;
     }
 
-    public void setAudiotext(String audiotext) {
-        Audiotext = audiotext;
+    public void setAudio_text(String audio_text) {
+        this.audio_text = audio_text;
     }
 
-    public Float getInterviewscore() {
-        return Interviewscore;
+    public String getConfidence_score() {
+        return confidence_score;
     }
 
-    public void setInterviewscore(Float interviewscore) {
-        Interviewscore = interviewscore;
+    public void setConfidence_score(String confidence_score) {
+        this.confidence_score = confidence_score;
+    }
+
+    public Emotions getEmotions() {
+        return emotions;
+    }
+
+    public void setEmotions(Emotions emotions) {
+        this.emotions = emotions;
     }
 }

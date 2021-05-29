@@ -2,6 +2,7 @@ package com.example.recruitai.Model;
 
 import com.example.recruitai.User;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class Job {
@@ -12,7 +13,8 @@ public class Job {
         String Jloc;
         String Jdoclink;
         String IQ;
-        List<UserClass> Juser;
+        String language;
+        HashMap<String,UserClass> Juser;
 
     public Job() {
     }
@@ -40,6 +42,14 @@ public class Job {
 
     public void setIQ(String IQ) {
         this.IQ = IQ;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public String getJname() {
@@ -82,11 +92,11 @@ public class Job {
         Jdoclink = jdoclink;
     }
 
-    public List<UserClass> getJuser() {
+    public HashMap<String, UserClass> getJuser() {
         return Juser;
     }
 
-    public void setJuser(List<UserClass> juser) {
+    public void setJuser(HashMap<String, UserClass> juser) {
         Juser = juser;
     }
 }

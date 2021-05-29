@@ -71,7 +71,6 @@ public class Company extends AppCompatActivity {
                         Intent jobdet=new Intent(Company.this,JobDetailsCompany.class);
                         jobdet.putExtra("JobID",jobAdapter.getRef(position).getKey());
                         startActivity(jobdet);
-
                     }
                 });
             }

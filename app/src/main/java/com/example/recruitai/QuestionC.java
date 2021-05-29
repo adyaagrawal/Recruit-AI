@@ -26,7 +26,6 @@ public class QuestionC extends AppCompatActivity {
     String jobid;
     DatabaseReference job;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

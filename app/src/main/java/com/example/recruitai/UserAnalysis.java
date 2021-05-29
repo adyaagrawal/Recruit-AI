@@ -50,7 +50,7 @@ public class UserAnalysis extends AppCompatActivity {
 
         firebaseDatabase=FirebaseDatabase.getInstance();
         dat=firebaseDatabase.getReference("Jobs");
-        dat.child(uid).child("Juser").child("0").addListenerForSingleValueEvent(new ValueEventListener() {
+        dat.child(uid).child("Juser").child(userid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 currentuser = snapshot.getValue(UserClass.class);

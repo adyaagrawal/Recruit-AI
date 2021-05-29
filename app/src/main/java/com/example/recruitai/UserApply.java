@@ -93,13 +93,13 @@ public class UserApply extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 UserClass user=new UserClass(unames,uphones,ucurrents,"Resume Submitted",url);
-                List<UserClass> list= new ArrayList<UserClass>();
-                list.add(user);
-                mdatabase.getReference().child("Jobs").child(JobID).child("Juser").setValue(list).addOnCompleteListener(new OnCompleteListener<Void>() {
+                mdatabase.getReference().child("Jobs").child(JobID).child("Juser").child(uid).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(UserApply.this,"Job Applied",Toast.LENGTH_SHORT).show();
+                        Log.d("api","api not called");
                         apicall();
+                        Log.d("api","api called");
                     }
                 });
             }
