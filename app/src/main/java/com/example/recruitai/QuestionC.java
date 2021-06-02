@@ -6,8 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,13 +21,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class QuestionC extends AppCompatActivity {
     EditText q;
     Button submit;
     FirebaseDatabase firebaseDatabase;
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
+    HashMap<String, String> langmap;
     String jobid;
+    Spinner languageSpinner;
     DatabaseReference job;
 
     @Override
@@ -38,6 +47,38 @@ public class QuestionC extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         user=firebaseAuth.getCurrentUser();
         jobid=user.getUid();
+
+        languageSpinner = findViewById(R.id.spinner2);
+        ArrayList<String> langname = new ArrayList<>();
+        langmap = new HashMap<>();
+        langname.add("English (United States)");
+        langmap.put("English (United States)","en-US");
+        langname.add("English (India)");
+        langmap.put("English (India)","en-IN");
+        langname.add("Hindi (India)");
+        langmap.put("Hindi (India)","hi-IN");
+        langname.add("Tamil (India)");
+        langmap.put("Tamil (India)","ta-IN");
+        langname.add("Telugu (India)");
+        langmap.put("Telugu (India)","te-IN");
+
+        ArrayAdapter<String> catnameadapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, langname);
+        catnameadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        /*langspinner.setAdapter(catnameadapter);
+        spinner.setVisibility(View.INVISIBLE);
+        catnamespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                catnamecurrent= adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(Category.this,catnamecurrent,Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                Toast.makeText(Category.this,"Nothing selected",Toast.LENGTH_SHORT).show();
+            }
+        });*/
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

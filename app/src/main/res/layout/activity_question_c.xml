@@ -11,31 +11,30 @@
         android:layout_width="311dp"
         android:layout_height="98dp"
         android:layout_marginStart="51dp"
-        android:layout_marginTop="73dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="560dp"
+        android:layout_marginBottom="24dp"
         android:fontFamily="@font/raleway_bold"
         android:text="Enter question for interview"
         android:textColor="@color/purple_500"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/question"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <EditText
         android:id="@+id/question"
         android:layout_width="305dp"
         android:layout_height="52dp"
         android:layout_marginStart="51dp"
-        android:layout_marginTop="123dp"
         android:layout_marginEnd="55dp"
-        android:layout_marginBottom="385dp"
+        android:layout_marginBottom="78dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView16"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -44,15 +43,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="54dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="73dp"
         android:layout_marginEnd="227dp"
-        android:layout_marginBottom="22dp"
+        android:layout_marginBottom="25dp"
         android:fontFamily="@font/raleway_bold"
         android:text="Question"
         android:textColor="#C10E0E"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,27 +62,40 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:layout_marginEnd="211dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
         android:fontFamily="@font/raleway_bold"
         android:text="Language"
         android:textColor="#C10E0E"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintBottom_toTopOf="@+id/spinner2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/question" />
 
     <Button
         android:id="@+id/questionsubmit"
         android:layout_width="178dp"
         android:layout_height="54dp"
         android:layout_marginStart="117dp"
-        android:layout_marginTop="221dp"
         android:layout_marginEnd="117dp"
-        android:layout_marginBottom="167dp"
+        android:layout_marginBottom="64dp"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="315dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginBottom="115dp"
+        app:layout_constraintBottom_toTopOf="@+id/questionsubmit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
 </androidx.constraintlayout.widget.ConstraintLayout>
