@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,6 +35,8 @@ public class QuestionC extends AppCompatActivity {
     String jobid;
     Spinner languageSpinner;
     DatabaseReference job;
+    String langidcurrent;
+    String userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,11 @@ public class QuestionC extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         user=firebaseAuth.getCurrentUser();
         jobid=user.getUid();
+
+        if (getIntent() != null) {
+            userid = getIntent().getStringExtra("UserID");
+            Log.d("snapshot",userid);
+        }
 
         languageSpinner = findViewById(R.id.spinner2);
         ArrayList<String> langname = new ArrayList<>();
@@ -62,38 +70,44 @@ public class QuestionC extends AppCompatActivity {
         langname.add("Telugu (India)");
         langmap.put("Telugu (India)","te-IN");
 
-        ArrayAdapter<String> catnameadapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> langnameadapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, langname);
-        catnameadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        /*langspinner.setAdapter(catnameadapter);
-        spinner.setVisibility(View.INVISIBLE);
-        catnamespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        langnameadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        languageSpinner.setAdapter(langnameadapter);
+        languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                catnamecurrent= adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(Category.this,catnamecurrent,Toast.LENGTH_SHORT).show();
+                String langnamecurrent= adapterView.getItemAtPosition(i).toString();
+                langidcurrent=langmap.get(langnamecurrent).toString();
+                Toast.makeText(QuestionC.this,langidcurrent,Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                Toast.makeText(Category.this,"Nothing selected",Toast.LENGTH_SHORT).show();
+                Toast.makeText(QuestionC.this,"Nothing selected",Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String q1=q.getText().toString();
-                job.child(jobid).child("Juser").child("0").child("status").setValue("Interview Approved").addOnCompleteListener(new OnCompleteListener<Void>() {
+                job.child(jobid).child("Juser").child(userid).child("status").setValue("Interview Approved").addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(QuestionC.this,"Status updated",Toast.LENGTH_SHORT).show();
                     }
                 });
-                job.child(jobid).child("IQ").setValue(q1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                job.child(jobid).child("iq").setValue(q1).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(QuestionC.this,"Question uploaded",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                job.child(jobid).child("language").setValue(langidcurrent).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(QuestionC.this,"Language uploaded",Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(QuestionC.this,JobDetailsCompany.class));
                     }
                 });

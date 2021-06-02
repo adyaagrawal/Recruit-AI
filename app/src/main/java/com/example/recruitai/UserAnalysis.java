@@ -58,7 +58,6 @@ public class UserAnalysis extends AppCompatActivity {
                 current.setText(currentuser.getCurrent());
                 phone.setText(currentuser.getPhone());
                 score.setText(currentuser.getResume_score().toString());
-
             }
 
             @Override
@@ -70,7 +69,9 @@ public class UserAnalysis extends AppCompatActivity {
         interview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(UserAnalysis.this,QuestionC.class));
+                Intent inter = new Intent(UserAnalysis.this,QuestionC.class);
+                inter.putExtra("UserID", userid);
+                startActivity(inter);
             }
         });
 
