@@ -13,7 +13,8 @@ public interface API {
     @GET("analyseresume")
     Call<ResumeResponse> resume(@Query("userid") String uid, @Query("companyid") String cid);
 
-    @GET("processVideo")
-    Call<InterviewResponse> interview(@Query("userid") String uid);
+    //http://165.22.217.172/interviewprocessing/?userid=IlGqWBBHVoQ45S04v0H3jF4h9AC2&companyid=vrxXYhd0SqWt96PaE1UpIulmazV2
+    @GET("interviewprocessing")
+    Call<InterviewResponse> interview(@Query("userid") String uid,@Query("companyid")String cid);
 
 }

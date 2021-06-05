@@ -6,71 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".FinalAnalysis">
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="189dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="167dp"
-        android:layout_marginBottom="643dp"
-        android:fontFamily="@font/raleway_bold"
-        android:text="Name"
-        android:textColor="@color/purple_500"
-        android:textSize="30sp"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="189dp"
-        android:layout_marginBottom="563dp"
-        android:fontFamily="@font/raleway_bold"
-        android:text="Resume Score"
-        android:textColor="@color/purple_500"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="154dp"
-        android:layout_marginBottom="480dp"
-        android:fontFamily="@font/raleway_bold"
-        android:text="Interview Speech"
-        android:textColor="@color/purple_500"
-        android:textSize="24sp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="268dp"
-        android:layout_height="105dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="87dp"
-        android:layout_marginBottom="328dp"
-        android:fontFamily="@font/raleway_bold"
-        android:text="Interview Confidence levels"
-        android:textColor="@color/purple_500"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

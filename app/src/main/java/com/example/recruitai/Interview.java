@@ -74,7 +74,9 @@ public class Interview extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Interview.this,MainActivity2.class));
+                Intent intent=new Intent(Interview.this,MainActivity2.class);
+                intent.putExtra("JobID",jobid);
+                startActivity(intent);
             }
         });
     }
