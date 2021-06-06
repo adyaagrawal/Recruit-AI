@@ -1,6 +1,6 @@
 package com.example.recruitai.Model;
 
-import com.google.gson.annotations.SerializedName;
+import java.util.HashMap;
 
 public class UserClass {
     String name;
@@ -12,7 +12,7 @@ public class UserClass {
     String interviewmp4;
     String audio_text;
     String confidence_score;
-    Emotions emotions;
+    HashMap<String, String> emotions;
 
     public UserClass() {
     }
@@ -97,11 +97,11 @@ public class UserClass {
         this.confidence_score = confidence_score;
     }
 
-    public Emotions getEmotions() {
+    public HashMap<String, String> getEmotions() {
         return emotions;
     }
 
-    public void setEmotions(Emotions emotions) {
+    public void setEmotions(HashMap<String, String> emotions) {
         this.emotions = emotions;
     }
 }
