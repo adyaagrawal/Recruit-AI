@@ -1,13 +1,17 @@
 package com.example.recruitai;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 import com.example.recruitai.Model.Job;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -68,14 +72,30 @@ public class Company extends AppCompatActivity {
                 viewholder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Intent jobdet=new Intent(Company.this,JobDetailsCompany.class);
-                        jobdet.putExtra("JobID",jobAdapter.getRef(position).getKey());
+                        Intent jobdet = new Intent(Company.this, JobDetailsCompany.class);
+                        jobdet.putExtra("JobID", jobAdapter.getRef(position).getKey());
                         startActivity(jobdet);
                     }
                 });
             }
         };
         recyclerView.setAdapter(jobAdapter);
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.sign_out_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.sign_out) {
+            firebaseAuth.signOut();
+            Intent signOutIntent = new Intent(Company.this, Signup.class);
+            startActivity(signOutIntent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
