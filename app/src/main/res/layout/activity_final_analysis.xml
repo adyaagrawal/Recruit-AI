@@ -19,14 +19,91 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_bold"
+                android:text="Name"
+                android:textColor="@color/purple_500"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/nameView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_semibold"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_bold"
+                android:text="Phone Number"
+                android:textColor="@color/purple_500"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/phoneView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_semibold"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_bold"
+                android:text="Resume Score"
+                android:textColor="@color/purple_500"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/ResumeScoreView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_semibold"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_bold"
+                android:text="Confidence Score"
+                android:textColor="@color/purple_500"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/ConfidenceScoreViewView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_semibold"
+                android:textSize="18sp" />
+
+
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pie_chart"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:layout_margin="10dp" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_bold"
+                android:text="Transcript"
+                android:textColor="@color/purple_500"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/transcriptView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_semibold"
+                android:textSize="18sp" />
+
 
         </LinearLayout>
+
     </ScrollView>
 
     <LinearLayout
