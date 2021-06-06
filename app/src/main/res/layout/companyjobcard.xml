@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/raleway_regular"
-            android:text="Number of Applicants: 1"
+            android:text="Number of Applicants: 0"
             android:textColor="#050505"
             android:textSize="24sp" />
     </LinearLayout>

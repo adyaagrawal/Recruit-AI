@@ -41,7 +41,7 @@ public class FinalAnalysis extends AppCompatActivity {
 
     UserClass currentUserData;
 
-    HashMap<String, Float> emotionMap = new HashMap<>();
+    HashMap<String, String> emotionMap = new HashMap<>();
 
     PieChart pieChart;
 
@@ -57,6 +57,8 @@ public class FinalAnalysis extends AppCompatActivity {
         phoneNumberView = findViewById(R.id.phoneView);
         resumeScoreView = findViewById(R.id.ResumeScoreView);
         confidenceScoreView = findViewById(R.id.ConfidenceScoreViewView);
+
+        pieChart = findViewById(R.id.pie_chart);
         transcriptView = findViewById(R.id.transcriptView);
 
 
@@ -80,7 +82,9 @@ public class FinalAnalysis extends AppCompatActivity {
                 confidenceScoreView.setText(currentUserData.getConfidence_score());
                 transcriptView.setText(currentUserData.getAudio_text());
 
-                Log.d("FinalAnalysisEmotion", currentUserData.getEmotions().getAngry());
+                emotionMap.putAll(currentUserData.getEmotions());
+                pieChartSetup();
+                Log.d("FinalAnalysisEmotion", currentUserData.getEmotions().toString());
             }
 
             @Override
@@ -90,9 +94,6 @@ public class FinalAnalysis extends AppCompatActivity {
         });
 
 
-        pieChart = findViewById(R.id.pie_chart);
-
-        pieChartSetup();
         pieChart.spin(1500, 0, 180f, Easing.EasingOption.EaseInOutQuad);
     }
 
@@ -103,34 +104,25 @@ public class FinalAnalysis extends AppCompatActivity {
         //Data from Database
         ArrayList<PieEntry> allEmotionList = new ArrayList<>();
 
-
-        emotionMap.put("Angry", (float) 9.82605);
-        emotionMap.put("Disgusted", (float) 21.168673);
-        emotionMap.put("Fearful", (float) 16.434626);
-        emotionMap.put("Happy", (float) 12.15301);
-        emotionMap.put("Neutral", (float) 19.672407);
-        emotionMap.put("Sad", (float) 6.626781);
-        emotionMap.put("Surprised", (float) 14.118446);
-
-        emotionMap.forEach((emotion, value) -> allEmotionList.add(new PieEntry(value, emotion)));
+        emotionMap.forEach((emotion, value) -> allEmotionList.add(new PieEntry(Float.parseFloat(value), emotion)));
 
         //Setting the Data to PieDataSet
         PieDataSet pieDataSet = new PieDataSet(allEmotionList, "");
 
         //Color Scheme
         final int[] MY_COLORS = {
-                //Neutral
-                Color.parseColor("#93F902"),
                 //Disgusted
                 Color.parseColor("#f9e502"),
-                //Fearful
-                Color.parseColor("#960902"),
                 //Happy
                 Color.parseColor("#088A23"),
-                //Angry
-                Color.parseColor("#FD2502"),
                 //Sad
                 Color.parseColor("#F902BC"),
+                //Neutral
+                Color.parseColor("#93F902"),
+                //Angry
+                Color.parseColor("#FD2502"),
+                //Fearful
+                Color.parseColor("#960902"),
                 ///Surprised
                 Color.parseColor("#02F9D3")
         };
