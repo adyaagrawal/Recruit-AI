@@ -68,6 +68,6 @@ public class UserSignup extends AppCompatActivity {
                     }
                 });
             }
-            });
+        });
     }
 }

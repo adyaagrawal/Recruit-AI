@@ -155,8 +155,6 @@ public class FinalAnalysis extends AppCompatActivity {
 
 //        pieChart.setDrawHoleEnabled(false);
         pieChart.setHoleRadius(75);
-
-
         Legend legend = pieChart.getLegend();
         legend.setPosition(Legend.LegendPosition.RIGHT_OF_CHART_CENTER);
         legend.setForm(Legend.LegendForm.CIRCLE);
