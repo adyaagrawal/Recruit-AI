@@ -1,5 +1,5 @@
 # Recruit-AI
-An android app that makes online recruitements easy and effective using 4 AI models. 
+An android app that makes online recruitments easy and effective using 4 AI models. 
 
 Backend repository: https://github.com/samyakj2307/recruitai-backend
 
